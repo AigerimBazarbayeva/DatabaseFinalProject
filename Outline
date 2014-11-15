@@ -1,0 +1,23 @@
+1) As entered - home page
+    1.1) login page
+    1.2) link to registration page
+
+2) Logged in -> 
+    2.1) Profile
+        2.1.1) All buys
+        2.1.2) All sells
+
+
+Functional:
+1) Make sell offer of space object (insert)
+2) Sell space object (update)
+3) Buy space object (update)
+4) Check information about space object (select)
+5) Find all space object defined by some filters
+6) Delete your account or (delete)
+7) Check inforamtion about planetary system (select)
+8) Update offered price
+9) Info about all my trades
+10) Info about all my planets/stars (with filters)
+11) Other users profile
+12) Sorts in some places
