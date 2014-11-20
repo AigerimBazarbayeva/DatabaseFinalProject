@@ -1,9 +1,13 @@
+<?php
+	require_once 'functions.php';
+	require_once 'DatabaseClass.php';
+?>
 <!DOCTYPE html>
 <!-- Welcome page -->
 <html>
 <head>
 	<link rel="stylesheet" href="mainstyle.css" type = "text/css"/>
-	<title>UniverseTrade</title>
+	<title>Create Account</title>
 </head>
 
 <body>
@@ -28,15 +32,21 @@
 						</ul>
 					</li>
 					
-					<a href="profile.php"> <li> Profile </li> </a>
+					<a href="profile.php"><li> Profile </li> </a>
 					<a href="encyclopedia.php"> <li> Encyclopedia </li> </a> 
 					<a href="about.php"> <li> About </li> </a> 
 				</ul>
 			</div>	
 		</div>
 	</div>
-<div id = "pageContent">
-	<p>Welcome to Universe trade</p>
+<div id="pageContent">
+	<form action="createAccount" name="post">
+		<p> Name 
+			<input type="text" name="firstName">
+			<input type="text" name="lastName">
+		</p>
+
+	</form>
 </div>
 	<div id="footer">
 		<div class="wrap">
