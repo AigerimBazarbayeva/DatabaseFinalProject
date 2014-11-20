@@ -8,12 +8,6 @@
 <head>
 	<link rel="stylesheet" href="mainstyle.css" type = "text/css"/>
 	<title>Create Account</title>
-	<script type="text/JavaScript">
-		function _change (_element) {
-			_element.value = '';
-			_element.style.color = '#FFFFFF';
-		}
-	</script>
 </head>
 
 <body>
@@ -46,30 +40,12 @@
 		</div>
 	</div>
 <div id="pageContent">
-	<form>
+	<form action="createAccount" name="post">
 		<p> Name 
-			<input 
-				type="text"
-				name="firstName"
-				value="Aika"
-				style="color: #CCCCCC;"
-				onclick ="console.log(typeof(this.style.color));
-						  if (this.style.color=='#CCCCCC') { 
-							_change(this); 
-						  }"
-			/>
+			<input type="text" name="firstName">
 			<input type="text" name="lastName">
 		</p>
 
-		<!-- <p>
-			Birth date
-			<select name="dayOfBirth">
-				<option value="1" >
-					1
-				</option>
-
-			</select>
-		</p> -->
 	</form>
 </div>
 	<div id="footer">
