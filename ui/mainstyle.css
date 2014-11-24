@@ -1,5 +1,5 @@
 body {
-    background-image: url("images/background.jpg");
+    background-image: white; <!--url("images/backgroundImage.jpg"); -->
     background-color: #cccccc;
     text-align: center;
 }
@@ -71,13 +71,14 @@ body {
     color: #555;
 }
 
+
 #usermenu ul li ul {
     padding: 0;
     position: relative;
     top: 105px;
     left: -20px;
     width: 110px;
-    display: none;
+    display: inline-block;
     opacity: 0;
     visibility: hidden;
     -webkit-transiton: opacity 0.2s;
@@ -94,9 +95,10 @@ body {
     display: block;
     color: #555;
     position: relative;
-    margin-top: 0px;
+    margin-top: -5px;
 }
 #usermenu ul li ul li:hover { background: #666; color: #fff; }
+
 #usermenu ul li:hover ul {
     display: block;
     opacity: 1;
