@@ -1,0 +1,115 @@
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*body {
+    background-image: url("imageLATER");
+    background-color: #cccccc;
+    text-align: center;
+}
+.wrap {
+    position:relative;
+    margin:auto;
+    width:950px;
+}
+#usermenu {
+    margin: auto;
+    display: block;
+    width: 705px;
+    height: 100px;
+    z-index: 40;
+}
+#usermenu ul {
+    padding: 15px 4px 17px 0;
+    list-style: none;
+    margin: auto;
+    display: inline;
+}
+#usermenu ul li {
+    font: bold 12px/18px sans-serif;
+    display: inline-block;
+    padding: 15px 20px;
+    background: #555;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    position: relative;
+    margin-top: 25px;
+    width: 100px;
+    text-align: center;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+#usermenu ul li:hover {
+    background: #fff;
+    color: #555;
+}
+
+#usermenu ul li ul {
+    padding: 0;
+    position: absolute;
+    top: 47px;
+    left: 0px;
+    width: 110px;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transiton: opacity 0.2s;
+    -moz-transition: opacity 0.2s;
+    -ms-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    -transition: opacity 0.2s;
+}
+
+#usermenu ul li ul li {
+    background: #fff;
+    width: 100px;
+    float: left;
+    display: block;
+    color: #555;
+    position: relative;
+    margin-top: 0px;
+}
+#usermenu ul li ul li:hover { background: #666; color: #fff; }
+#usermenu ul li:hover ul {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}*/
+=======
+createAccount {
+    position: relative;
+    margin: auto;
+}
+>>>>>>> 9bb3d911eb5cfc5fe52c491a3775a8ade0039d94

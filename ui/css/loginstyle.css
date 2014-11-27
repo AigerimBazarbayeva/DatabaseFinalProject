@@ -1,0 +1,22 @@
+body {  
+    background-image: white; /*url("html/images/backgroundImage.jpg"); */
+    text-align: center;
+}
+
+#logo {
+    float: center;   
+}
+
+#image {
+	style="width:304px;height:228px
+}
+
+.pageContent {
+    width: 750px;
+    margin: auto;
+}
+#h1{
+	color: #FFFFFF;
+	text-align: center;
+}
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="mainstyle.css">
+	<title>Create Account</title>
+</head>
+<body>
+	<div id="logo">
+		<img src="images/logo.png" alt="logo_UT">
+	</div>
+	<div id="h1">Create your Universe Trade Account</div>
+
+	<div id="loginBox">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" name="logform" id="logform">
+			<div id="usernameInput">
+				<label for="username">Username</label>
+				<input id="username"
+					   name="username"
+					   type="text"
+					   maxlength="255"
+					   placeholder="Username"
+					   value="<?php echo $username ?>">
+			</div>
+			<div id="usernameError" style="color: red;">
+				<?php echo $usernameError?>
+			</div>
+
+			<div id="passwordInput">
+				<label for="password">Password:</label>
+				<input id="password"
+					   name="password"
+					   type="password"
+					   maxlength="255"
+					   class="theusernameput"
+					   placeholder="Password">
+			</div>
+			<div id="usernameError" style="color: red;">
+				<?php echo $passwordError?>
+			</div>
+
+			<input id="logbutton" name="logInButton" type="submit" value="Log in">
+		</form>
+	</div>	
+
+
+</body>
+</html>
