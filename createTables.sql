@@ -65,11 +65,14 @@ ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE `user` (
-	`ID` INT(11) NOT NULL DEFAULT '0',
+	`ID` INT(11) NOT NULL AUTO_INCREMENT,
 	`login` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
-	`name` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
+	`fname` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
+	`lname` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
+	`dateOfBirth` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`password` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
 	`placeOfBirth` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
+	`gender` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
 	PRIMARY KEY (`ID`, `login`)
 )
 COLLATE='utf8_unicode_ci'

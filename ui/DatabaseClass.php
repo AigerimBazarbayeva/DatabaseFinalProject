@@ -13,7 +13,7 @@ class Database {
 	private $dbport   	= DB_PORT;
 
 	private $dbh; // Database hander (will be instance of PDO)
-	private $errorMessage // Contains error message if exists and null otherwise
+	private $errorMessage; // Contains error message if exists and null otherwise
 	private $sqlStatement; // SQL statement holder
 
 	private $connected;
@@ -41,18 +41,17 @@ class Database {
 		$this->$sqlStatement = $this->$dbh->prepare($query);
 	}
 
-
 	public function bind($param, $value, $type = null) {
 		// Define type of $value if it was not defined
 		if (is_null($type)) {
 			switch (true) {
-				case is_int($value)
+				case is_int($value):
 					$type = PDO::PARAM_INT;
 					break;
-				case is_bool($value)
+				case is_bool($value):
 					$type = PDO::PARAM_BOOL;
 					break;
-				case is_null($value)
+				case is_null($value):
 					$type = PDO::PARAM_NULL;
 					break;
 				default:
