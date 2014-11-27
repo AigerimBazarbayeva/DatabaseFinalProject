@@ -2,102 +2,8 @@
 	require_once('functions.php');
 	require_once('DatabaseClass.php');
 
-	$monthName = array(
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December"
-	);
-
 	$username = "";
-	$firstName = "";
-	$lastName = "";
 	$password = "";
-	$passwordVerify = "";
-	$birthDay = "";
-	$birthMonth = "";
-	$birthYear = "";
-	$birthPlace = "";
-	$gender = "";
-
-	function displayDateOfBirthSelect() {
-		$result = "";
-		for ($i = 1; $i <= 31; $i++) {
-			$result .= "<option"
-			if ($i == $birthDay) {
-				$result .= " selected";
-			}
-
-			$result .= " value=\"";
-			$result .= $i;
-			$result .= "\">";
-			$result .= $i;
-			$result .= "</option>";
-		}
-
-		return $result;
-	}
-
-	function displayMonthOfBirthSelect() {
-		global $monthName;
-		$result = "";
-		for ($i = 0; $i < 12; $i++) {
-			$result .= "<option"
-			if ($monthName[$i] == $birthMonth) {
-				$result .= " selected";
-			}
-
-			$result .= " value=\"";
-			$result .= $monthName[$i];
-			$result .= "\">";
-			$result .= $monthName[$i];
-			$result .= "</option>";
-		}
-
-		return $result;
-	}
-
-	function displayYearOfBirthSelect() {
-		$result = "";
-		for ($i = 1930; $i < 2015; $i++) {
-			$result .= "<option"
-			if ($i == $birthYear) {
-				$result .= " selected";
-			}
-
-			$result .= " value=\"";
-			$result .= $i;
-			$result .= "\">";
-			$result .= $i;
-			$result .= "</option>";
-		}
-
-		return $result;
-	}
-
-	function displayGenderRadio() {
-		$result = "<input type=\"radio\" name=\"gender\" value=\"Male\"";
-		if ($gender == "Male")
-			$result .= " checked";
-		$result .= ">";
-		$result .= "Male";
-
-		$result .= "<input type=\"radio\" name=\"gender\" value=\"Female\"";
-		if ($gender == "Female")
-			$result .= " checked";
-		$result .= ">";
-		$result .= "Female";
-
-		return $result;
-	}
 
 	$errorOccured  = false;
 	$usernameError = "";
@@ -109,7 +15,7 @@
 		$username = testInput($_POST["username"]);
 		$password = testInput($_POST["password"]);
 
-		if (empty($username) {
+		if (empty($username)) {
 			$usernameError = "Username cannot be empty";
 			$errorOccured = true;
 		} else if (!preg_match("/^[a-zA-Z.]*$/", $username)) {
@@ -129,12 +35,12 @@
 				$databaseError = "Could not connect to server. Please try again later.";
 			} else {
 				$database->query("SELECT id, password FROM user WHERE user.login = :username");
-				$database->bind(":username", $username);
+				$databse->bind(":username", $username);
 				$userInfo = $database->single();
 				
 				if ($database->rowCount == 0) {
 					$errorOccured = true;
-					$userNotFoundError = "Username or password is incorrect."
+					$userNotFoundError = "Username or password is incorrect.";
 				} else {
 					$correctPassword = $userInfo['password'];
 					if (!password_verify($password, $correctPassword)) {
@@ -148,14 +54,14 @@
 				}
 			}
 		}
-	}
+	}	
 ?>
 <!DOCTYPE html>
 <!-- Welcome page -->
 <html>
 <head>
 	<link rel="stylesheet" href="mainstyle.css" type = "text/css"/>
-	<title>Create Account</title>
+	<title> Sign in </title>
 </head>
 
 <body>
@@ -188,20 +94,19 @@
 		</div>
 	</div>
 <div id="pageContent">
-	<form style="background-color: white" method="post">
-		<p> Name 
-			<input type="text" name="firstName">
-			<input type="text" name="lastName">
-		</p>
-
-		<p>
-			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" name="logform" id="logform">
+	<div id="logformbox" style="background-color:white;">
+		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" name="logform" id="logform">
 			<div id="usernameInput">
 				<label for="username">Username</label>
-				<input id="username" name="username" type="text" maxlength="255"placeholder="Username" value="<?php echo $username ?>">
+				<input id="username"
+					   name="username"
+					   type="text"
+					   maxlength="255"
+					   placeholder="Username"
+					   value="<?php echo $username ?>">
 			</div>
 			<div id="usernameError" style="color: red;">
-				<?php echo $usernameError ?>
+				<?php echo $usernameError?>
 			</div>
 
 			<div id="passwordInput">
@@ -219,29 +124,8 @@
 
 			<input id="logbutton" name="logInButton" type="submit" value="Log in">
 		</form>
-			Birth date
-			<select name="dayOfBirth"> 
-			<?php  
-				echo displayDateOfBirthSelect();
-			?>
-			</select>
-			
-			<select name="monthOfBirth"> 
-			<?php 
-				echo displayMonthOfBirthSelect();
-			?>
-			</select>
+	</div>
 
-			<select name="yearOfBirth">
-				<?php 
-					echo displayYearOfBirthSelect();
-				?>
-			</select>
-
-			<input type="submit" action="">
-		</p>
-	</form>
-</div>
 	<div id="footer">
 		<div class="wrap">
 			<p>Footer</p>
@@ -250,7 +134,3 @@
 </body>
 
 </html>
-
-<?php
-		
-?>
