@@ -1,8 +1,7 @@
 <?php
 class Session {
     private $db;
-    
-    public function __construct() {
+    public function __construct(){
         // Instantiate new Database object
         $this->db = new Database();
 
@@ -20,9 +19,9 @@ class Session {
         session_start();
     }
 
-    public function _open() {
+    public function _open(){
         // If successful
-        if($this->db) {
+        if($this->db){
             // Return True
             return true;
         }
@@ -30,12 +29,12 @@ class Session {
         return false;
     }
 
-    public function _close() {
+    public function _close(){
         // Close the database connection
         $this->db = null;
     }
 
-    public function _read($id) {
+    public function _read($id){
         // Set query
         $this->db->query('SELECT data FROM sessions WHERE id = :id');
 
@@ -44,18 +43,18 @@ class Session {
 
         // Attempt execution
         // If successful
-        if ($this->db->execute()){
+        if($this->db->execute()){
             // Save returned row
             $row = $this->db->single();
             // Return the data
             return $row['data'];
-        } else {
+        }else{
             // Return an empty string
             return '';
         }
     }
 
-    public function _write($id, $data) {
+    public function _write($id, $data){
         // Create time stamp
         $access = time();
 
@@ -69,7 +68,7 @@ class Session {
 
         // Attempt Execution
         // If successful
-        if ($this->db->execute()) {
+        if($this->db->execute()){
             // Return True
             return true;
         }
@@ -78,7 +77,7 @@ class Session {
         return false;
     }
 
-    public function _destroy($id) {
+    public function _destroy($id){
         // Set query
         $this->db->query('DELETE FROM sessions WHERE id = :id');
 
@@ -87,7 +86,7 @@ class Session {
 
         // Attempt execution
         // If successful
-        if ($this->db->execute()) {
+        if($this->db->execute()){
             // Return True
             return true;
         }
@@ -96,7 +95,7 @@ class Session {
         return false;
     }
 
-    public function _gc($max) {
+    public function _gc($max){
         // Calculate what is to be deemed old
         $old = time() - $max;
 

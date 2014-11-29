@@ -1,115 +1,24 @@
 <?php
 	require_once('functions.php');
 	require_once('DatabaseClass.php');
-
-	$monthName = array(
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December"
-	);
+	require_once('SessionClass.php');
 
 	$username = "";
-	$firstName = "";
-	$lastName = "";
 	$password = "";
 	$passwordVerify = "";
-	$birthDay = "";
-	$birthMonth = "";
-	$birthYear = "";
-	$birthPlace = "";
-	$gender = "";
-
-	function displayDateOfBirthSelect() {
-		$result = "";
-		for ($i = 1; $i <= 31; $i++) {
-			$result .= "<option"
-			if ($i == $birthDay) {
-				$result .= " selected";
-			}
-
-			$result .= " value=\"";
-			$result .= $i;
-			$result .= "\">";
-			$result .= $i;
-			$result .= "</option>";
-		}
-
-		return $result;
-	}
-
-	function displayMonthOfBirthSelect() {
-		global $monthName;
-		$result = "";
-		for ($i = 0; $i < 12; $i++) {
-			$result .= "<option"
-			if ($monthName[$i] == $birthMonth) {
-				$result .= " selected";
-			}
-
-			$result .= " value=\"";
-			$result .= $monthName[$i];
-			$result .= "\">";
-			$result .= $monthName[$i];
-			$result .= "</option>";
-		}
-
-		return $result;
-	}
-
-	function displayYearOfBirthSelect() {
-		$result = "";
-		for ($i = 1930; $i < 2015; $i++) {
-			$result .= "<option"
-			if ($i == $birthYear) {
-				$result .= " selected";
-			}
-
-			$result .= " value=\"";
-			$result .= $i;
-			$result .= "\">";
-			$result .= $i;
-			$result .= "</option>";
-		}
-
-		return $result;
-	}
-
-	function displayGenderRadio() {
-		$result = "<input type=\"radio\" name=\"gender\" value=\"Male\"";
-		if ($gender == "Male")
-			$result .= " checked";
-		$result .= ">";
-		$result .= "Male";
-
-		$result .= "<input type=\"radio\" name=\"gender\" value=\"Female\"";
-		if ($gender == "Female")
-			$result .= " checked";
-		$result .= ">";
-		$result .= "Female";
-
-		return $result;
-	}
 
 	$errorOccured  = false;
 	$usernameError = "";
 	$passwordError = "";
 	$databaseError = "";
-	$userNotFoundError = "";
+	$usernameIsBisyError = "";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$username = testInput($_POST["username"]);
 		$password = testInput($_POST["password"]);
+		$passwordVerify = testInput($_POST["repassword"]);
 
-		if (empty($username) {
+		if (empty($username)) {
 			$usernameError = "Username cannot be empty";
 			$errorOccured = true;
 		} else if (!preg_match("/^[a-zA-Z.]*$/", $username)) {
@@ -117,44 +26,60 @@
 			$errorOccured = true;
 		}
 
+		if (empty($passwordVerify)) {
+			$passwordError = "Passwords do not match";
+			$errorOccured = true;
+		}
+
 		if (empty($password)) {
 			$passwordError = "Password should not be empty";
 			$errorOccured = true;
 		}
-		
+
 		if (!$errorOccured) {
 			$database = new Database();
-			if (!$database->connected) {
+			if (!$database->isConnected()) {
 				$errorOccured = true;
 				$databaseError = "Could not connect to server. Please try again later.";
 			} else {
-				$database->query("SELECT id, password FROM user WHERE user.login = :username");
-				$database->bind(":username", $username);
-				$userInfo = $database->single();
-				
-				if ($database->rowCount == 0) {
-					$errorOccured = true;
-					$userNotFoundError = "Username or password is incorrect."
-				} else {
-					$correctPassword = $userInfo['password'];
-					if (!password_verify($password, $correctPassword)) {
+
+				try {
+					$database->query("SELECT login FROM user WHERE user.login = :username");
+					$database->bind(":username", $username);
+					$database->execute();
+					if ($database->rowCount() != 0) {
 						$errorOccured = true;
-						$userNotFoundError = "Username or password is incorrect.";
-					} else {
-						$_SESSION['loggedin'] = $userInfo['id'];
-						header("Location: index.php");
+						$usernameIsBisyError = "User with such login already exists";
+					}
+				} catch (PDOEXception $e) {
+					$errorOccured = true;
+					$databaseError = "Could not create new user. Please try again later.";
+				}
+
+				if (!$errorOccured) {
+					try {
+						$password = password_hash($password, PASSWORD_DEFAULT);
+						$database->query("INSERT INTO user (login, password) VALUES (:username, :password)");
+						$database->bind(":username", $username);
+						$database->bind(":password", $password);
+						$database->execute();
+						header("Location: signIn.php");
 						exit();
+					} catch (PDOException $e) {
+						$errorOccured = true;
+						$databaseError = "Could not create new user. Please try again later.";
 					}
 				}
 			}
 		}
 	}
 ?>
+
 <!DOCTYPE html>
 <!-- Welcome page -->
 <html>
 <head>
-	<link rel="stylesheet" href="mainstyle.css" type = "text/css"/>
+	<link rel="stylesheet" href="css/mainstyle.css" type = "text/css"/>
 	<title>Create Account</title>
 </head>
 
@@ -187,70 +112,43 @@
 			</div>	
 		</div>
 	</div>
-<div id="pageContent">
-	<form style="background-color: white" method="post">
-		<p> Name 
-			<input type="text" name="firstName">
-			<input type="text" name="lastName">
-		</p>
-
-		<p>
-			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" name="logform" id="logform">
+	<div id="pageContent">
+		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" id="loginForm">
+		<fieldset>	
+			<legend>
+				<img src="">
+			</legend>
 			<div id="usernameInput">
 				<label for="username">Username</label>
-				<input id="username" name="username" type="text" maxlength="255"placeholder="Username" value="<?php echo $username ?>">
+				<input name="username" type="text" placeholder="Username" value="<?php echo $username ?>">
 			</div>
-			<div id="usernameError" style="color: red;">
+
+			<div class="errorBox">
 				<?php echo $usernameError ?>
 			</div>
 
 			<div id="passwordInput">
 				<label for="password">Password:</label>
-				<input id="password"
-					   name="password"
-					   type="password"
-					   maxlength="255"
-					   class="theusernameput"
-					   placeholder="Password">
+				<input name="password" type="password" placeholder="Password">
 			</div>
-			<div id="usernameError" style="color: red;">
-				<?php echo $passwordError?>
-			</div>
-
-			<input id="logbutton" name="logInButton" type="submit" value="Log in">
-		</form>
-			Birth date
-			<select name="dayOfBirth"> 
-			<?php  
-				echo displayDateOfBirthSelect();
-			?>
-			</select>
 			
-			<select name="monthOfBirth"> 
-			<?php 
-				echo displayMonthOfBirthSelect();
-			?>
-			</select>
+			<div id="repasswordInput">
+				<label for="repassword">Password again:</label>
+				<input name="repassword" type="password" placeholder="Password again">
+			</div>
 
-			<select name="yearOfBirth">
-				<?php 
-					echo displayYearOfBirthSelect();
-				?>
-			</select>
+			<div class="errorBox">
+				<?php echo $passwordError ?>
+			</div>
 
-			<input type="submit" action="">
-		</p>
-	</form>
-</div>
+			<input type="submit" value="Create account">
+		</fieldset>
+		</form>
+	</div>
 	<div id="footer">
 		<div class="wrap">
 			<p>Footer</p>
 		</div>
 	</div>
 </body>
-
 </html>
-
-<?php
-		
-?>
