@@ -1,48 +1,104 @@
 <!DOCTYPE html>
+<!-- Welcome page -->
 <html>
 <head>
-	<link rel="stylesheet" href="loginstyle.css" type="text/css">
-	<title>Login</title>
+<style>
+#profile-img {
+	width:97px; 
+    height:97px;
+    float: center;   
+}
+
+#legendText {
+	text-align: center;
+    font-size: 20px;
+    color: yellow;
+}
+
+#loginBox {
+    float: center; 
+    width: 600px;
+    margin: auto;
+}
+
+fieldset {
+    border-color: #FFCC00;
+}
+
+.errorMessage {
+    color: red;
+}
+
+form {
+	float: center;
+}
+</style>
+
+	<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
+	<title>UniverseTrade</title>
 </head>
-<body>
-	<div id="logo">
-		<img src="images/logo.png" alt="logo_UT">
+
+<body>	
+	<div id="header">
+		<div class="wrap">
+			<div id="logo">
+				<a href="index.php"><img src="images/logoFar.png" alt="logoFar"></a>
+			</div>
+
+			<div id = "usermenu">
+				<ul>
+					
+					<a href="index.php"><li>Home</li></a>	
+					<a href="starsStore.php"><li>Stars store</li></a>
+					<a href="planetsStore.php"><li>Planets store</li></a>
+					<a href="profile.php"><li>Profile</li></a>	
+					<a href="aboutPage.php"><li>About</li></a>	
+				</ul>	
+			</div>
+
+			<div id="signInBox">
+				<a href="signIn.php" id="signInButton"> Sign in </a> <a href="createAccount.php" id="createAccountButton"> Create Account </a>
+			</div>
+				
+		</div>
 	</div>
-	<div id="h1">Sign in to continue to Universe Trade</div>
-	
-	<div id="loginBox">
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" name="logform" id="logform">
-			<div id="usernameInput">
-				<label for="username">Username</label>
-				<input id="username"
-					   name="username"
-					   type="text"
-					   maxlength="255"
-					   placeholder="Username"
-					   value="<?php echo $username ?>">
-			</div>
-			<div id="usernameError" style="color: red;">
-				<?php echo $usernameError?>
-			</div>
 
-			<div id="passwordInput">
-				<label for="password">Password:</label>
-				<input id="password"
-					   name="password"
-					   type="password"
-					   maxlength="255"
-					   class="theusernameput"
-					   placeholder="Password">
-			</div>
-			<div id="usernameError" style="color: red;">
-				<?php echo $passwordError?>
-			</div>
+<!-- End of head -->
+	<div id="pageContent">
+		<div id="loginBox">
+			<form action="action_page.php">
+				<fieldset>
+					<legend>
+						<div id="legendText">Sign in to continue to Universe Trade</div>
+					</legend>
+						<div id="prof-img">
+							<img id="profile-img" src="images/profile.png" alt="profile">
+						</div>
 
-			<input id="logbutton" name="logInButton" type="submit" value="Log in">
-		</form>
-	</div>	
+						<input type="text" name="username" placeholder="Username">
+						<!-- For error msg-->
+						<div class="errorMessage">Invalid username.</div>
+						<!-- later username can be changed to email address, with verification -->
+						<input type="password" name="pswrd" placeholder="Password">
+						<!-- For error msg-->
+						<div class="errorMessage">Username or password is incorrect.</div>
+						<input type="submit" name="signButton" value="Sign in">
+				</fieldset>
+			</form>
+			
+			<a id="lnk-frgt-psswrd" href="helpPage.html">
+			<span style = "color:#FFCC00; font-weight:bold; float:left">
+			Need help?
+			</span>
+			</a>
+		</div>
+	</div>
 
 
-
+	<div id="footer">
+		<div class="wrap">
+				<p><span style = "color:#000080; font-weight: bold">Authors:</span> Bekzhan Kassenov, Aigerim Bazarbayeva</p>
+		</div>
+	</div>
 </body>
 </html>

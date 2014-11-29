@@ -1,11 +1,15 @@
+@font-face {
+    font-family: Roboto-regularnyi;
+    src: url(Roboto-Regular.ttf);
+}
 body {  
-    background-image: url("images/backgroundImage.jpg"); 
+    background-color: #000080; 
     text-align: center;
+    font-family: Roboto-regularnyi;
 }
     
-.logo {
-    float: left;
-    
+#logo {
+    float: left;   
 }
 
 .wrap {
@@ -15,8 +19,9 @@ body {
 }
 
 #pageContent {
-    width: 750px;
+    width: 900px;
     margin: auto;
+    float: center;
 }
 
 #loginCreateForm{
@@ -24,16 +29,67 @@ body {
 }
 
 #header {
-    background-color:#000000;
+    background-color:#008080;
     width:100%;
-    height: 130px;
+    height: 122px;
     text-align: left;
+    border-style: double;
+    border-color: #00FFFF;
 }
 
-#footer {
-    background-color:#000000;
-    width:100%;
-    height: 8.5%;
+#signInBox{
+    float:right;
+    margin-top: 45px;
+    margin-right: 45px;
+}
+
+a {
+    color: #000128;
+    text-decoration: none;
+}
+
+#createAccountButton {
+    padding: 5px;
+    border: groove;
+}
+
+#signInButton {
+    padding: 5px;
+    color: #000080;
+}
+
+#createAccountButton:link {
+    background-color: #000080;
+    color: #00FFFF;    
+}
+
+#createAccountButton:visited {
+    background-color: #000080;
+    color: #00FFFF;
+}
+
+#createAccountButton:hover {
+    background-color: #00004F;
+}
+
+#createAccountButton:active {
+    background-color: #FFCC00;
+}
+
+#signInButton:link {
+    background-color: #00FFFF;
+}
+
+#signInButton:visited {
+    background-color: #00FFFF;
+}
+
+#signInButton:hover {
+    background-color: #97FFFF;
+}
+
+#signInButton:active {
+    background-color: #FFCC00;
 }
 
 #usermenu {
@@ -42,56 +98,31 @@ body {
     z-index: 40;
 }
 #usermenu ul {
-    padding: 15px 4px 17px 0;
     margin: auto
 }
 #usermenu ul li {
-    font: bold 12px/18px sans-serif;
     display: inline-block;
-    padding: 15px 20px;
-    background: #000000;
-    color: #FFD700;
+    color: #000000;
     cursor: pointer;
     float: left;    
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 77px;
     text-align: center;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    transition: all 0.2s;
+    margin: auto;
+    padding-top: 45px;
 }
 
-#usermenu ul li ul {
-    padding: 0;
-    position: relative;
-    top: 105px;
-    left: -20px;
-    width: 110px;
-    display: inline-block;
-    opacity: 0;
-    visibility: hidden;
-    -webkit-transiton: opacity 0.2s;
-    -moz-transition: opacity 0.2s;
-    -ms-transition: opacity 0.2s;
-    -o-transition: opacity 0.2s;
-    -transition: opacity 0.2s;
+#usermenu ul li:hover {
+    color: white;
+    background: black;
 }
 
-#usermenu ul li ul li {
-    background: #fff;
-    width: 100px;
-    height: 15px;
-    display: block;
-    color: #555;
-    position: relative;
-    margin-top: -5px;
-}
-#usermenu ul li ul li:hover { background: #666; color: #fff; }
-
-#usermenu ul li:hover ul {
-    display: block;
-    opacity: 1;
-    visibility: visible;
+#footer {
+    background-color:#008080;
+    border-style: double;
+    border-color: #FFCC00;
+    width:100%;
+    height: 8.5%;
+    color: #FFCC00;
+    float: left;
 }
