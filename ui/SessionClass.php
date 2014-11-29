@@ -77,6 +77,7 @@ class Session {
         // Return False
         return false;
     }
+    
 
     public function _destroy($id) {
         // Set query

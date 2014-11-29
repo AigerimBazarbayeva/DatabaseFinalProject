@@ -1,4 +1,13 @@
-DROP TABLE IF EXISTS spaceObject;
+DROP TABLE IF EXISTS `sessions`;
+DROP TABLE IF EXISTS `buyOffer`;
+DROP TABLE IF EXISTS `saleInstance`;
+DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `moon`;
+DROP TABLE IF EXISTS `planet`;
+DROP TABLE IF EXISTS `planetarySystem`;
+DROP TABLE IF EXISTS `star`;
+DROP TABLE IF EXISTS `spaceObject`;
+
 CREATE TABLE `spaceObject` (
 	`name` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
 	`radius` INT(11) NULL DEFAULT NULL,
@@ -13,7 +22,6 @@ CREATE TABLE `spaceObject` (
 COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS star;
 CREATE TABLE `star` (
 	`OName` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
 	`starType` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
@@ -24,7 +32,6 @@ CREATE TABLE `star` (
 COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS planetarySystem;
 CREATE TABLE `planetarySystem` (
 	`name` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
 	`starName` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
@@ -36,8 +43,6 @@ CREATE TABLE `planetarySystem` (
 COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB;
 
-
-DROP TABLE IF EXISTS planet;
 CREATE TABLE `planet` (
 	`OName` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
 	`isLiveable` TINYINT(1) NOT NULL DEFAULT '0',
@@ -52,7 +57,6 @@ CREATE TABLE `planet` (
 COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS moon;
 CREATE TABLE `moon` (
 	`name` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
 	`Pname` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
@@ -63,22 +67,19 @@ CREATE TABLE `moon` (
 COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS user;
 CREATE TABLE `user` (
 	`ID` INT(11) NOT NULL AUTO_INCREMENT,
 	`login` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
-	`fname` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
-	`lname` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
-	`dateOfBirth` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-	`password` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
-	`placeOfBirth` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
-	`gender` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8_unicode_ci',
+	`fname` VARCHAR(255) COLLATE 'utf8_unicode_ci',
+	`lname` VARCHAR(255) COLLATE 'utf8_unicode_ci',
+	`password` VARCHAR(255) COLLATE 'utf8_unicode_ci',
+	`placeOfBirth` VARCHAR(255) COLLATE 'utf8_unicode_ci',
+	`gender` VARCHAR(255) COLLATE 'utf8_unicode_ci',
 	PRIMARY KEY (`ID`, `login`)
 )
 COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS saleInstance;
 CREATE TABLE `saleInstance` (
 	`buyerID` INT(11) NULL DEFAULT NULL,
 	`sellerID` INT(11) NOT NULL DEFAULT '0',
@@ -98,7 +99,6 @@ CREATE TABLE `saleInstance` (
 COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB;
 
-DROP TABLE IF EXISTS buyOffer;
 CREATE TABLE `buyOffer` (
 	`buyerID` INT(11) NOT NULL DEFAULT '0',
 	`offeredPrice` INT(11) NULL DEFAULT NULL,
@@ -113,3 +113,10 @@ CREATE TABLE `buyOffer` (
 )
 COLLATE='utf8_unicode_ci'
 ENGINE=InnoDB;
+
+CREATE TABLE `sessions` (
+  `id` varchar(32) NOT NULL,
+  `access` int(10) unsigned DEFAULT NULL,
+  `data` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

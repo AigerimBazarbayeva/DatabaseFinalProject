@@ -12,7 +12,7 @@ class Database {
 	private $dbname   	= DB_NAME;
 	private $dbport   	= DB_PORT;
 
-	private $dbh; // Database hander (will be instance of PDO)
+	private $dbh; // Database handler (will be instance of PDO)
 	private $errorMessage; // Contains error message if exists and null otherwise
 	private $sqlStatement; // SQL statement holder
 
@@ -20,8 +20,7 @@ class Database {
 
 	public function __construct() {
 		// Set database source name
-		$dsn = "mysql:host=" . $this->$host . ";port=" . $this->$port . ";dbname" . $this->$dbname;
-
+		$dsn = "mysql:host=" . $this->host . ";port=" . $this->dbport . ";dbname=" . $this->dbname;
 		// Set options
 		$options = array(
 			PDO::ATTR_PERSISTENT => true,
@@ -29,16 +28,16 @@ class Database {
 		);
 
 		try {
-			$this->dbh = new PDO($dsn, $this->$user, $this->$pass, $this->$options);
-			$this->$connected = true;
+			$this->dbh = new PDO($dsn, $this->user, $this->password, $options);
+			$this->connected = true;
 		} catch (PDOException $e) {
-			$this->$conected = false;
-			$this->$errorMessage = $e->getMessage();
+			$this->errorMessage = $e->getMessage();
+			$this->connected = false;
 		}
 	}
 
 	public function query($query) {
-		$this->$sqlStatement = $this->$dbh->prepare($query);
+		$this->sqlStatement = $this->dbh->prepare($query);
 	}
 
 	public function bind($param, $value, $type = null) {
@@ -61,32 +60,43 @@ class Database {
 		}
 
 		// Bind value in $sqlStatement
-		$this->$sqlStatement->bindValue($param, $value, $type);
-	}
-
-	public function getResult() {
-		$this->$execute();
-		return $this->$sqlStatement->fetchAll(PDO::FETCH_ASSOC);
-	}
-
-	public function rowCount() {
-		return $this->$sqlStatement->rowCount();
+		$this->sqlStatement->bindValue($param, $value, $type);
 	}
 
 	public function execute() {
-		$this->$sqlStatement->execute();
+		//try {
+			$this->sqlStatement->execute();
+		} catch (PDOException $e) {
+			//echo $e->getMessage();
+			//die();
+		}
+	}
+
+	public function getResult() {
+		$this->execute();
+		return $this->sqlStatement->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	public function single() {
+		$this->execute();
+		return $this->sqlStatement->fetch(PDO::FETCH_ASSOC);
+	}
+
+	public function rowCount() {
+		return $this->sqlStatement->rowCount();
 	}
 
 	public function isConnected() {
-		return $this->$connected;
+		return $this->connected;
 	}
 
 	public function getErrorMesage() {
-		return $this->$errorMesage;
+		return $this->errorMesage;
 	}
 
 	//get the id of the row that was last inserted
 	public function lastInsertId() {
     	return $this->dbh->lastInsertId();
-	}
+	}	
 }
+?>
