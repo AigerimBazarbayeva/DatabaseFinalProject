@@ -17,28 +17,35 @@
 	}
 
 	function displayUserInfo() {
-		$userID = $_SESSION["loggedin"];
+		$userID = $_SESSION['loggedin'];
 		$database = new Database();
 
 		if (!$database->isConnected()) {
-			echo "Error occured during connecting to server. Please reload the page."
+			echo "Error occured during connecting to server. Please reload the page.";
 			die();
 		}
 
-		$result = false;
+		$queryResult = false;
 		try {
 			$database->query("SELECT * FROM user WHERE user.id = :id");
 			$database->bind(":id", $userID);
-			$result = $database->single();
+			$queryResult = $database->single();
 		} catch (PDOException $e) {
-			echo "Error occured during connecting to server. Please reload the page."
+			echo "Error occured during connecting to server. Please reload the page.";
 			die();
 		}
 
-		$firstName    = updateValue($result, 'fname');
-		$lastName     = updateValue($result, 'lname');
-		$placeOfBirth = updateValue($result, 'placeOfBirth');
-		$gender       = updateValue($result, 'gender');
+		$firstName    = updateValue($queryResult, 'fname');
+		$lastName     = updateValue($queryResult, 'lname');
+		$placeOfBirth = updateValue($queryResult, 'placeOfBirth');
+		$gender       = updateValue($queryResult, 'gender');
+
+		$result = "<div>";
+		$result .= "Name: " . $queryResult['fname'] . "<br/>";
+		$result .= "Last name: " . $queryResult['lname'] . "<br/>";
+		$result .= "Place of birth: " . $queryResult['placeOfBirth'] . "<br/>";
+		$result .= "Gender: " . $queryResult['gender'] . "<br/>";
+		$result .= "</div>";
 	}
 ?>
 <!DOCTYPE html>
@@ -84,13 +91,13 @@
 	</div>
 
 <div id = "pageContent">
-	<p>Welcome to Universe trade</p>
+	<?php echo displayUserInfo(); ?>
 </div>
 
-	<div id="footer">
-		<div class="wrap">
-			<p>Footer</p>
-		</div>
+<div id="footer">
+	<div class="wrap">
+		<p>Footer</p>
 	</div>
+</div>
 </body>
 </html>

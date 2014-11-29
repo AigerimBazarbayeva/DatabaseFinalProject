@@ -7,7 +7,11 @@ function testInput($input) {
 }
 
 function isLoggedIn() {
-	return isset($_SESSION['loggedin']);
+	if (isset($_SESSION['loggedin'])) {
+		return true;
+	}
+
+	return false;
 }
 
 ?>

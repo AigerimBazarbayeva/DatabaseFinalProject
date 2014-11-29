@@ -4,6 +4,7 @@
 	require_once('SessionClass.php');
 
 	$session = new Session();
+
 	if (isLoggedIn()) {
 		header("Location: index.php"); // Redirect browser to index.php
 		exit();
@@ -25,7 +26,7 @@
 		$password = testInput($_POST["password"]);
 
 		if (empty($username)) {
-			$usernameError = "Username cannot be empty";
+			$usernameError = "Username should be empty";
 			$errorOccured = true;
 		} else if (!preg_match("/^[a-zA-Z.]*$/", $username)) {
 			$usernameError = "Only letters and dots are allowed";

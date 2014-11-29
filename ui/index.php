@@ -1,3 +1,9 @@
+<?php
+	require_once('DatabaseClass.php');
+	require_once('SessionClass.php');
+	require_once('functions.php');
+	$session = new Session();
+?>
 <!DOCTYPE html>
 <!-- Welcome page -->
 <html>
@@ -27,7 +33,7 @@
 						</a>		
 					</li>
 					<li>
-						<a class="subMenu" href="#">Profile</a>	
+						<a class="subMenu" href="profile.php">Profile</a>	
 					</li>
 					<li>
 						<a class="subMenu" href="#">Encyclopedia</a>	

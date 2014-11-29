@@ -64,11 +64,11 @@ class Database {
 	}
 
 	public function execute() {
-		//try {
+		try {
 			$this->sqlStatement->execute();
 		} catch (PDOException $e) {
-			//echo $e->getMessage();
-			//die();
+			echo $e->getMessage();
+			die();
 		}
 	}
 
