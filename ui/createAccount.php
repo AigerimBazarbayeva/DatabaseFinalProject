@@ -79,75 +79,91 @@
 <!-- Welcome page -->
 <html>
 <head>
-	<link rel="stylesheet" href="css/mainstyle.css" type = "text/css"/>
-	<title>Create Account</title>
+<style>
+
+#legendText {
+	text-align: center;
+    font-size: 20px;
+    color: yellow;
+}
+
+#createAccountBox {
+    float: right; 
+    width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+fieldset {
+    border-color: #FFCC00;
+}
+
+.errorMessage {
+    color: red;
+}
+
+form {
+	float: right;
+}
+</style>
+
+	<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
+	<title>UniverseTrade</title>
 </head>
 
-<body>
+<body>	
 	<div id="header">
 		<div class="wrap">
-			<div class="logo">
-				<a href="index.php"><img src="images/logo.png"></a>
+			<div id="logo">
+				<a href="index.php"><img src="images/logoFar.png" alt="logoFar"></a>
 			</div>
 
 			<div id = "usermenu">
 				<ul>
-					<a href="index.php"> <li> Home </li> </a> 
-					<li>
-					Store
-						<ul>
-						<a href="star.php">
-							<li>Stars</li>
-						</a>
-						<a href="planet.php">
-							<li>Planets</li>
-						</a>
-						</ul>
-					</li>
 					
-					<a href="profile.php"><li> Profile </li> </a>
-					<a href="encyclopedia.php"> <li> Encyclopedia </li> </a> 
-					<a href="about.php"> <li> About </li> </a> 
-				</ul>
-			</div>	
+					<a href="index.php"><li>Home</li></a>	
+					<a href="starsStore.php"><li>Stars store</li></a>
+					<a href="planetsStore.php"><li>Planets store</li></a>
+					<a href="profile.php"><li>Profile</li></a>	
+					<a href="aboutPage.php"><li>About</li></a>	
+				</ul>	
+			</div>
+
+			<div id="signInBox">
+				<a href="signIn.php" id="signInButton"> Sign in </a>
+			</div>
+				
 		</div>
 	</div>
+
+<!-- End of head -->
 	<div id="pageContent">
-		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" id="loginForm">
-		<fieldset>	
-			<legend>
-				<img src="">
-			</legend>
-			<div id="usernameInput">
-				<label for="username">Username</label>
-				<input name="username" type="text" placeholder="Username" value="<?php echo $username ?>">
-			</div>
 
-			<div class="errorBox">
-				<?php echo $usernameError ?>
-			</div>
-
-			<div id="passwordInput">
-				<label for="password">Password:</label>
-				<input name="password" type="password" placeholder="Password">
-			</div>
-			
-			<div id="repasswordInput">
-				<label for="repassword">Password again:</label>
-				<input name="repassword" type="password" placeholder="Password again">
-			</div>
-
-			<div class="errorBox">
-				<?php echo $passwordError ?>
-			</div>
-
-			<input type="submit" value="Create account">
-		</fieldset>
-		</form>
+		<div id="createAccountBox">
+			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
+				<fieldset>
+					<legend>
+						<div id="legendText">Create account in Universe Trade</div>
+					</legend>
+						<input type="text" name="username" placeholder="Username">
+						<!-- For error msg-->
+						<div class="errorMessage"><?php echo $usernameError; ?></div>
+						<!-- later username can be changed to email address, with verification -->
+						<input type="password" name="password" placeholder="Password">
+						<!-- For error msg-->
+						<div></div>
+						<input type="password" name="repassword" placeholder="Password again">
+						<div class="errorMessage"><?php echo $passwordError .  $databaseError; ?></div>
+						<input type="submit" name="signButton" value="Sign in">
+				</fieldset>
+			</form>
+		</div>
 	</div>
+
+
 	<div id="footer">
 		<div class="wrap">
-			<p>Footer</p>
+			<p><span style = "color:#000080; font-weight: bold">Authors:</span> Bekzhan Kassenov, Aigerim Bazarbayeva</p>
 		</div>
 	</div>
 </body>

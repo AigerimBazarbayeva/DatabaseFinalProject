@@ -24,10 +24,14 @@
 				</ul>	
 			</div>
 
-			<div id="signInBox">
-				<a href="signIn.php" id="signInButton"> Sign in </a> <a href="createAccount.php" id="createAccountButton"> Create Account </a>
-			</div>
-				
+			<?php
+				if (!isLoggedIn()) {
+					echo displaySignInBox();
+				} else {
+					echo displayLogoutBox();
+				}
+			?>
+			
 		</div>
 	</div>
 

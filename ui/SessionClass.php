@@ -16,7 +16,8 @@ class Session {
         );
 
         // Start the session
-        session_start();
+        //if (!session_start())
+        //    die();
     }
 
     public function _open(){
@@ -115,3 +116,4 @@ class Session {
         return false;
     }
 }
+?>
