@@ -7,7 +7,7 @@
 	session_start();
 	//print_r($_SESSION);
 	if (!isLoggedIn()) {
-		//header("Location: signIn.php");
+		header("Location: signIn.php");
 		exit();
 	}
 
@@ -42,11 +42,13 @@
 		$placeOfBirth = updateValue($queryResult, 'placeOfBirth');
 		$gender       = updateValue($queryResult, 'gender');
 
-		$result = "<div>";
-		$result .= "Name: " . $queryResult['fname'] . "<br/>";
-		$result .= "Last name: " . $queryResult['lname'] . "<br/>";
-		$result .= "Place of birth: " . $queryResult['placeOfBirth'] . "<br/>";
-		$result .= "Gender: " . $queryResult['gender'] . "<br/>";
+		$result = "<div id=\"profileBox\">";
+		$result .= "<table>";
+		$result .= "<tr> <td style=\"width: 150px; color: yellow;\"> First name:     </td> <td>" . $queryResult['fname'] .         "</td> </tr>";
+		$result .= "<tr> <td style=\"width: 150px; color: yellow;\"> Last name:      </td> <td>" . $queryResult['lname'] .         "</td> </tr>";
+		$result .= "<tr> <td style=\"width: 150px; color: yellow;\"> Place of birth: </td> <td>" . $queryResult['placeOfBirth'] .  "</td> </tr>";
+		$result .= "<tr> <td style=\"width: 150px; color: yellow;\"> Gender:         </td> <td>" . $queryResult['gender'] .        "</td> </tr>";
+		$result .= "</table>";
 		$result .= "</div>";
 
 		return $result;
@@ -56,8 +58,18 @@
 <!-- Welcome page -->
 <html>
 <head>
+<style>
+	#profileBox {
+		text-align: left;
+		float: center;
+		margin: auto;
+		width: 400px;
+		color: white;
+		padding: 15px;
+	}
+</style>	
 	<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
-	<title>UniverseTrade</title>
+	<title>Profile</title>
 </head>
 
 <body>	

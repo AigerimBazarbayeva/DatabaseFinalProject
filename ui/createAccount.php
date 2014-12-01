@@ -32,7 +32,7 @@
 		}
 
 		if (empty($password)) {
-			$passwordError = "Password should not be empty";
+			$passwordError = "Password cannot be empty";
 			$errorOccured = true;
 		}
 
@@ -105,10 +105,14 @@ fieldset {
 form {
 	float: right;
 }
+
+.labelBox {
+	color: #ffff00;
+}
 </style>
 
 	<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
-	<title>UniverseTrade</title>
+	<title>Create Account</title>
 </head>
 
 <body>	
@@ -145,16 +149,26 @@ form {
 					<legend>
 						<div id="legendText">Create account in Universe Trade</div>
 					</legend>
-						<input type="text" name="username" placeholder="Username">
-						<!-- For error msg-->
-						<div class="errorMessage"><?php echo $usernameError; ?></div>
-						<!-- later username can be changed to email address, with verification -->
-						<input type="password" name="password" placeholder="Password">
-						<!-- For error msg-->
-						<div></div>
-						<input type="password" name="repassword" placeholder="Password again">
-						<div class="errorMessage"><?php echo $passwordError .  $databaseError; ?></div>
-						<input type="submit" name="signButton" value="Sign in">
+				
+					<div class="labelBox">
+						<label for="username"> Username </label>
+					</div>
+					<input type="text" name="username" placeholder="Username">
+					<!-- For error msg-->
+					<div class="errorMessage"><?php echo $usernameError; ?></div>
+					<!-- later username can be changed to email address, with verification -->
+					
+					<div class="labelBox">
+						<label for="password"> Password </label>
+					</div>
+					<input type="password" name="password" placeholder="Password">
+					<!-- For error msg-->
+					<div class="labelBox">
+						<label for="repassword"> Password again </label>
+					</div>
+					<input type="password" name="repassword" placeholder="Password again">
+					<div class="errorMessage"><?php echo $passwordError .  $databaseError; ?></div>
+					<input type="submit" value="Create Account">
 				</fieldset>
 			</form>
 		</div>

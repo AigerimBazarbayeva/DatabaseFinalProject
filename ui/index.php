@@ -11,6 +11,11 @@
 <!-- Welcome page -->
 <html>
 <head>
+<style>
+	#imageBox {
+		padding: 15px;
+	}
+</style>
 	<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
 	<title>UniverseTrade</title>
 </head>
@@ -44,7 +49,7 @@
 	</div>
 
 <div id = "pageContent">
-	<p>Welcome to Universe trade</p>
+	<div id="imageBox"> <img src="images/Index-bg.jpg" width="90%"/></div>
 </div>
 
 	<div id="footer">

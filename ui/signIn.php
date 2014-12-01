@@ -23,7 +23,7 @@
 		$password = testInput($_POST["password"]);
 
 		if (empty($username)) {
-			$usernameError = "Username should be empty";
+			$usernameError = "Username cannot be empty";
 			$errorOccured = true;
 		} else if (!preg_match("/^[a-zA-Z.]*$/", $username)) {
 			$usernameError = "Only letters and dots are allowed";
@@ -31,10 +31,10 @@
 		}
 
 		if (empty($password)) {
-			$passwordError = "Password should not be empty";
+			$passwordError = "Password cannot be empty";
 			$errorOccured = true;
 		}
-		
+
 		if (!$errorOccured) {
 			$database = new Database();
 			if (!$database->isConnected()) {
@@ -61,7 +61,7 @@
 				}
 			}
 		}
-	}	
+	}
 ?>
 <!DOCTYPE html>
 <!-- Welcome page -->
@@ -100,7 +100,7 @@ form {
 </style>
 
 	<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
-	<title>UniverseTrade</title>
+	<title>Sign In</title>
 </head>
 
 <body>	
@@ -137,18 +137,18 @@ form {
 					<legend>
 						<div id="legendText">Sign in to continue to Universe Trade</div>
 					</legend>
-						<div id="prof-img">
-							<img id="profile-img" src="images/profile.png" alt="profile">
-						</div>
+					<div id="prof-img">
+						<img id="profile-img" src="images/profile.png" alt="profile">
+					</div>
 
-						<input type="text" name="username" placeholder="Username">
-						<!-- For error msg-->
-						<div class="errorMessage"><?php echo $usernameError; ?></div>
-						<!-- later username can be changed to email address, with verification -->
-						<input type="password" name="password" placeholder="Password">
-						<!-- For error msg-->
-						<div class="errorMessage"><?php echo $passwordError . "<br/>" . $databaseError; ?></div>
-						<input type="submit" name="signButton" value="Sign in">
+					<input type="text" name="username" placeholder="Username">
+					<!-- For error msg-->
+					<div class="errorMessage"><?php echo $usernameError; ?></div>
+					<!-- later username can be changed to email address, with verification -->
+					<input type="password" name="password" placeholder="Password">
+					<!-- For error msg-->
+					<div class="errorMessage"><?php echo $passwordError . "<br/>" . $databaseError; ?></div>
+					<input type="submit" value="Sign in">
 				</fieldset>
 			</form>
 			
