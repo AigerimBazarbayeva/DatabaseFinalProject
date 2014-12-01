@@ -19,7 +19,8 @@ body {
 }
 
 #pageContent {
-    width: 900px;
+    width: 750px;
+    height: 440px;
     margin: auto;
     float: center;
 }

@@ -11,10 +11,19 @@
 		exit();
 	}
 ?>
+
 <!DOCTYPE html>
 <!-- Welcome page -->
 <html>
 <head>
+<style>
+	#textBox {
+		text-align: left;
+		padding-top: 15px;
+		margin: auto;
+		width: 500px;
+	}
+</style>
 	<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
 	<title>UniverseTrade</title>
 </head>
@@ -49,7 +58,15 @@
 	</div>
 
 <div id = "pageContent">
-	<p>Welcome to Universe trade</p>
+	<div id="textBox"> 
+	<span style="font-weight: bold;"> About UT</span>
+	<br/><br/>
+	The Universe trade (UT) was founded in 2014. Its mission is promote commercial trading website platform that allows user to buy and sale astronomical object through international cooperation. The key activity of UT is organization of sale/buy instances between users without traditional buying/selling model.
+	<br/><br/>
+	
+	The authors of project created only imaginary web-site that not reqiured to exist in reality. Any matches or coincides with real object or user names are incidental and random. Authors do not have any responsibilities for content of the site.
+	</p>
+	</div>
 </div>
 
 	<div id="footer">

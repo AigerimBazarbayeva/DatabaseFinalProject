@@ -2,12 +2,20 @@
 	require_once('DatabaseClass.php');
 	require_once('SessionClass.php');
 	require_once('functions.php');
-	$session = new Session();
+	
+	//$thesession = new Session();
+	session_start();
+	//print_r($_SESSION);
 ?>
 <!DOCTYPE html>
 <!-- Welcome page -->
 <html>
 <head>
+<style>
+	#imageBox {
+		padding: 15px;
+	}
+</style>
 	<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
 	<title>UniverseTrade</title>
 </head>
@@ -15,44 +23,38 @@
 <body>	
 	<div id="header">
 		<div class="wrap">
-			<div class="logo">
-				<a href="index.php"><img src="images/logo.png"></a>
+			<div id="logo">
+				<a href="index.php"><img src="images/logoFar.png" alt="logoFar"></a>
 			</div>
 
 			<div id = "usermenu">
-				<ul id ="menubar1" class="menuHorizontal">
-					<li>
-						<a class="subMenu" href="#">Home</a>	
-					</li>
-					<li>
-						<a class="subMenu" href="#">Store
-							<ul>
-								<li><a href="smth1.php">Stars</a></li>
-								<li><a href="smth2.php">Planets</a></li>
-							</ul>
-						</a>		
-					</li>
-					<li>
-						<a class="subMenu" href="profile.php">Profile</a>	
-					</li>
-					<li>
-						<a class="subMenu" href="#">Encyclopedia</a>	
-					</li>
-					<li>
-						<a class="subMenu" href="#">About</a>	
-					</li>
+				<ul>
+					
+					<a href="index.php"><li>Home</li></a>	
+					<a href="starsStore.php"><li>Stars store</li></a>
+					<a href="planetsStore.php"><li>Planets store</li></a>
+					<a href="profile.php"><li>Profile</li></a>	
+					<a href="aboutPage.php"><li>About</li></a>	
 				</ul>	
-			</div>	
+			</div>
+
+			<?php	if (!isLoggedIn()) {
+						echo displaySignInBox();
+					} else {
+						echo displayLogoutBox();
+					}
+					?>
+				
 		</div>
 	</div>
 
 <div id = "pageContent">
-	<p>Welcome to Universe trade</p>
+	<div id="imageBox"> <img src="images/Index-bg.jpg" width="90%"/></div>
 </div>
 
 	<div id="footer">
 		<div class="wrap">
-			<p>Footer</p>
+				<p><span style = "color:#000080; font-weight: bold">Authors:</span> Bekzhan Kassenov, Aigerim Bazarbayeva</p>
 		</div>
 	</div>
 </body>
