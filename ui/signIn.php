@@ -39,7 +39,7 @@
 			$database = new Database();
 			if (!$database->isConnected()) {
 				$errorOccured = true;
-				$databaseError = "Could not connect to server. Please try again later.";
+				$databaseError = $database->getErrorMessage() . " Could not connect to server. Please try again later.";
 			} else {
 				$database->query("SELECT id, password FROM user WHERE user.login = :username");
 				$database->bind(":username", $username);
@@ -47,7 +47,7 @@
 				
 				if ($database->rowCount() == 0) {
 					$errorOccured = true;
-					$usernameError = "Incorrect username or password.";
+					$usernameError = "Username or password is incorrect.";
 				} else {
 					$correctPassword = $userInfo['password'];
 					if (!password_verify($password, $correctPassword)) {
