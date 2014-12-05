@@ -11,7 +11,7 @@
 	$usernameError = "";
 	$passwordError = "";
 	$databaseError = "";
-	$usernameIsBisyError = "";
+	$usernameIsBusyError = "";
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$username = testInput($_POST["username"]);
@@ -49,7 +49,7 @@
 					$database->execute();
 					if ($database->rowCount() != 0) {
 						$errorOccured = true;
-						$usernameIsBisyError = "User with such login already exists";
+						$usernameIsBusyError = "User with such login already exists";
 					}
 				} catch (PDOEXception $e) {
 					$errorOccured = true;
