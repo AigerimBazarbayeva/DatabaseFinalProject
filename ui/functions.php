@@ -14,7 +14,7 @@ function isLoggedIn() {
 	return false;
 }
 
-function displaySignInBox() 
+function displaySignInBox() {
 	$result = "<div id=\"signInBox\">";
 	$result .= "<a href=\"signIn.php\" id=\"signInButton\"> Sign in </a>";
 	$result .= "<a href=\"createAccount.php\" id=\"createAccountButton\"> Create Account </a>";

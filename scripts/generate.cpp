@@ -18,6 +18,7 @@ vector <string> stars_list;
 vector <string> moons_list;
 
 // Resulting queries for objects
+vector <string> spaceObject_result;
 vector <string> planetarySystems_result;
 vector <string> planets_result;
 vector <string> stars_result;
@@ -71,8 +72,6 @@ void strcopy(char*& dest, const char *source) {
 }
 
 void generate_queries() {
- 	freopen("temp.sql", "w", stdout);
-
  	for (size_t i = 0; i < stars_list.size(); i++) {
  		char* buffptr = buffer;
 
@@ -91,7 +90,7 @@ void generate_queries() {
  		strcopy(buffptr, generate_random_string(15).c_str());
  		strcopy(buffptr, "', 1);\n");
 
- 		printf("%s", buffer);
+ 		spaceObject_result.push_back(string(buffer));
 
 		buffptr = buffer;
  		strcopy(buffptr, "INSERT INTO star(OName, starType, color) VALUES('");
@@ -104,12 +103,6 @@ void generate_queries() {
  		
  		stars_result.push_back(string(buffer));
  	}
-	puts("");
-
-	for (size_t i = 0; i < stars_result.size(); i++) {
-		printf("%s", stars_result[i].c_str());
- 	}
- 	puts("");
 
  	for (int i = 0; i < 5; i++) {
  	 	char *buffptr = buffer;
@@ -122,10 +115,7 @@ void generate_queries() {
  	 	strcopy(buffptr, generate_random_string(100).c_str());
  	 	strcopy(buffptr, "');\n");
  	 	planetarySystems_result.push_back(string(buffer));
-
- 	 	printf("%s", buffer);
  	}
- 	puts("");
 
  	for (size_t i = 0; i < planets_list.size(); i++) {
  		char* buffptr = buffer;
@@ -145,7 +135,7 @@ void generate_queries() {
  		strcopy(buffptr, generate_random_string(15).c_str());
  		strcopy(buffptr, "', 1);\n");
 
- 		printf("%s", buffer);
+ 		spaceObject_result.push_back(string(buffer));
 
 		buffptr = buffer;
  		strcopy(buffptr, "INSERT INTO planet(OName, isLiveable, hasWater, hasAtmosphere, planetarySystemName) VALUES('");
@@ -163,16 +153,44 @@ void generate_queries() {
  		
  		planets_result.push_back(string(buffer));
  	}
- 	puts("");
 
-	for (size_t i = 0; i < planets_result.size(); i++) {
-		printf("%s", planets_result[i].c_str());
+ 	for (size_t i = 0; i < moons_list.size(); i++) {
+ 		char* buffptr = buffer;
+
+ 		strcopy(buffptr, "INSERT INTO moon(name, PName) VALUES ('");
+ 		strcopy(buffptr, moons_list[i].c_str());
+ 		strcopy(buffptr, "', '");
+ 		strcopy(buffptr, planets_list[rand() % planets_list.size()].c_str());
+ 		strcopy(buffptr, "');\n");
+
+ 		moons_result.push_back(string(buffer));
  	}
+}
+
+void print_vector_string(const vector <string>& vec) {
+	for (size_t i = 0; i < vec.size(); i++) {
+		printf("%s", vec[i].c_str());
+	}
+	printf("\n");
+}
+
+void print_queries() {
+	freopen("temp.sql", "w", stdout);
+
+	print_vector_string(spaceObject_result);
+	print_vector_string(stars_result);
+	print_vector_string(planetarySystems_result);
+	print_vector_string(planets_result);
+	print_vector_string(moons_result);
 }
 
 int main() {
 	generate_lists();
 
 	generate_queries();
+
+	print_queries();
+	
 	return 0;
 }
+	

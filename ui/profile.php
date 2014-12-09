@@ -11,6 +11,8 @@
 		exit();
 	}
 
+	$userID = $_SESSION['loggedin'];
+
 	function updateValue(&$array, $value) {
 		if (!isset($array[$value]) || empty($array[$value]) || is_null($array[$value]))
 			$array[$value] = "Not filled";
@@ -52,6 +54,17 @@
 		$result .= "</div>";
 
 		return $result;
+	}
+
+	if ($_SERVER['REQUEST_METHOD'] === "GET") {
+		if (isset($_GET['delete'])) {
+			$database = new Database();
+			$database->query("DELETE FROM user WHERE user.ID = :userID");
+			$database->bind(":userID", $userID);
+			$database->execute();
+			header("Location: logout.php");
+			exit();
+		}
 	}
 ?>
 <!DOCTYPE html>
@@ -103,11 +116,23 @@
 
 <div id = "pageContent">
 	<?php echo displayUserInfo(); ?>
+	<div>
+		<form action="updateProfile.php">
+			<input type="submit" value="Update my profile">
+		</form>
+	</div>
+
+	<div>
+		<form action=<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?> method="get">
+			<input type="hidden" name="delete" value="true">
+			<input type="submit" value="Delete my profile">
+		</form>
+	</div>
 </div>
 
 	<div id="footer">
 		<div class="wrap">
-				<p><span style = "color:#000080; font-weight: bold">Authors:</span> Bekzhan Kassenov, Aigerim Bazarbayeva</p>
+			<p><span style = "color:#000080; font-weight: bold">Authors:</span> Bekzhan Kassenov, Aigerim Bazarbayeva</p>
 		</div>
 	</div>
 </body>

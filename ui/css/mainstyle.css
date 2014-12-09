@@ -22,6 +22,8 @@ body {
     width: 750px;
     margin: auto;
     float: center;
+    padding-bottom: 15px;
+    padding-top: 15px;
 }
 
 #loginCreateForm{
@@ -30,11 +32,13 @@ body {
 
 #header {
     background-color:#008080;
-    width:100%;
+    width:100.5%;
     height: 122px;
     text-align: left;
     border-style: double;
     border-color: #00FFFF;
+    margin-top: -8px;
+    margin-left: -8px;
 }
 
 #signInBox{

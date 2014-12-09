@@ -3,6 +3,12 @@
 	require_once('DatabaseClass.php');
 	require_once('SessionClass.php');
 
+	session_start();
+	if (isLoggedIn()) {
+		header("Location: index.php");
+		exit();
+	}
+	
 	$username = "";
 	$password = "";
 	$passwordVerify = "";
@@ -155,7 +161,7 @@ form {
 					</div>
 					<input type="text" name="username" placeholder="Username">
 					<!-- For error msg-->
-					<div class="errorMessage"><?php echo $usernameError; ?></div>
+					<div class="errorMessage"><?php echo $usernameError . $usernameIsBusyError; ?></div>
 					<!-- later username can be changed to email address, with verification -->
 					
 					<div class="labelBox">
